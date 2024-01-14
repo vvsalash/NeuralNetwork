@@ -5,6 +5,8 @@
 #include <algorithm>
 #include <array>
 #include <cassert>
+#include <cmath>
+#include <exception>
 #include <memory>
 #include <random>
 #include <vector>
@@ -18,17 +20,23 @@ public:
 
     Data(const Data<T> &other);
 
-    Data<T>& operator=(const Data<T>& other);
+    Data<T> &operator=(const Data<T> &other);
 
-    int32_t GetSize() const;
+    Data<T> operator+(const Data<T> &other);
 
-    T Set(int32_t i, T value);
+    Data<T> operator*(const T value);
 
-    T Set(int32_t i, int32_t j, T value);
+    Data<T> operator/(const T value);
 
-    T Set(int32_t i, int32_t j, int32_t k, T value);
+    ~Data();
 
-    T Set(int32_t i, int32_t j, int32_t k, int32_t l, T value);
+    void Set(int32_t i, T value);
+
+    void Set(int32_t i, int32_t j, T value);
+
+    void Set(int32_t i, int32_t j, int32_t k, T value);
+
+    void Set(int32_t i, int32_t j, int32_t k, int32_t l, T value);
 
     T Get(int32_t i) const;
 
@@ -38,7 +46,9 @@ public:
 
     T Get(int32_t i, int32_t j, int32_t k, int32_t l) const;
 
-    Data<T> MatrixMultiplication(Data<T>& other);
+    Data<T> MatrixMultiplication(Data<T> &other);
+
+    Data<T> Transpose();
 
     Data<T> Sigmoid();
 
@@ -47,18 +57,19 @@ public:
     void NormalRandom(std::default_random_engine generator, std::normal_distribution<double> distribution,
                       double multiplier);
 
-
-    static T SigmoidFunction();
-
-    static T ReLUFunction();
-
     std::array<int32_t, magic::kMaxDimCount> GetDimensions() const;
 
     std::shared_ptr<T> GetData() const;
 
     int32_t GetDimension(size_t i) const;
 
+    int32_t GetSize() const;
+
     int8_t GetDimensionsCount() const;
+
+    static T SigmoidFunction(T argument);
+
+    static T ReLUFunction(T argument);
 
 private:
     std::array<int32_t, magic::kMaxDimCount> dimensions_;
