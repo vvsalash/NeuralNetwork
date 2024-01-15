@@ -28,7 +28,9 @@ Data<T> &Data<T>::operator=(const Data<T> &other) {
         if (size_ != magic::kUndefinedSize) {
             data_.reset(other.GetData());
         }
-        data_ = other.GetData();
+        dimensions_ = other.GetDimensions();
+        size_ = other.GetSize();
+        count_of_dimensions_ = other.GetDimensionsCount();
     }
     return *this;
 }
