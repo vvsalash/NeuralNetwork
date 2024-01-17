@@ -16,9 +16,9 @@ public:
     std::pair<Data<double>, std::vector<int32_t>> NextBatch();
 
 private:
-    void LoadInputs(std::string& data);
+    void LoadInputs(const std::string& data);
 
-    void LoadLabels(std::string& data);
+    void LoadLabels(const std::string& data);
 
     uint32_t ConvertBytesToInt(const char* bytes);
 
